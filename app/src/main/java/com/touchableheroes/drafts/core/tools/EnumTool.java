@@ -39,6 +39,10 @@ public class EnumTool {
             return new EnumTypeWrapper((Class<Enum>) src.getClass()); // Class<Enum> type
         }
 
+        public Enum[] values() {
+            return (Enum[]) EnumSet.allOf(src.getDeclaringClass()).toArray();
+        }
+
         public String fqn() {
             return this.src.getClass().getName();
         }
@@ -56,7 +60,7 @@ public class EnumTool {
             return type.getAnnotation(key);
         }
 
-        private Enum[] values() {
+        public Enum[] values() {
             return (Enum[]) EnumSet.allOf(type).toArray();
         }
     }
