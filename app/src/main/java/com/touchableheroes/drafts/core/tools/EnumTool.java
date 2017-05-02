@@ -3,6 +3,7 @@ package com.touchableheroes.drafts.core.tools;
 import com.touchableheroes.drafts.core.logger.Tracer;
 
 import java.lang.annotation.Annotation;
+import java.util.EnumSet;
 
 /**
  * Created by asiebert on 26.02.16.
@@ -55,6 +56,9 @@ public class EnumTool {
             return type.getAnnotation(key);
         }
 
+        private Enum[] values() {
+            return (Enum[]) EnumSet.allOf(type).toArray();
+        }
     }
 
     public static EnumWrapper withEnum(final Enum enumX) {
