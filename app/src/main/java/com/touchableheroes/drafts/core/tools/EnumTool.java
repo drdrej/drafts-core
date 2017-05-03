@@ -1,5 +1,7 @@
 package com.touchableheroes.drafts.core.tools;
 
+import android.support.annotation.NonNull;
+
 import com.touchableheroes.drafts.core.logger.Tracer;
 
 import java.lang.annotation.Annotation;
@@ -40,7 +42,19 @@ public class EnumTool {
         }
 
         public Enum[] values() {
-            return (Enum[]) EnumSet.allOf(src.getDeclaringClass()).toArray();
+            final Class type = src.getDeclaringClass();
+
+            return _values(type);
+        }
+
+        @NonNull
+        private static Enum[] _values(Class type) {
+            final EnumSet all = EnumSet.allOf( type );
+            final Enum[] rval = new Enum[ all.size() ];
+
+            (all).toArray(rval);
+
+            return rval;
         }
 
         public String fqn() {
@@ -61,7 +75,7 @@ public class EnumTool {
         }
 
         public Enum[] values() {
-            return (Enum[]) EnumSet.allOf(type).toArray();
+            return EnumWrapper._values(type);
         }
     }
 
